@@ -14,11 +14,11 @@ By integrating this validation into the CI/CD pipeline, teams can **automate qua
 ---
 
 ## Features
-✅ Checks for duplicate **metadata** (name & namespace combination).
-✅ Ensures **host-path** combinations are unique.
-✅ Validates **service name, namespace, and host** uniqueness.
-✅ Blocks faulty PRs from being merged, preventing ingress conflicts.
-✅ Provides **clear error messages** for quick resolution.
+✅ Checks for duplicate **metadata** (name & namespace combination).  
+✅ Ensures **host-path** combinations are unique.  
+✅ Validates **service name, namespace, and host** uniqueness.  
+✅ Blocks faulty PRs from being merged, preventing ingress conflicts.  
+✅ Provides **clear error messages** for quick resolution.  
 
 ---
 
@@ -80,19 +80,4 @@ Validation failed with the following errors:
 Total Errors: 1
 ```
 
----
-
-## Contributions
-We welcome contributions! Please submit a PR if you have improvements or new features to add.
-
-For any issues, create a GitHub issue or reach out to the maintainers.
-
----
-
-## License
-This project is licensed under the **MIT License**.
-
----
-
-Happy coding! 🚀
 
