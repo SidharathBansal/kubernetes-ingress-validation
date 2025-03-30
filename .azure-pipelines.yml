@@ -1,0 +1,51 @@
+trigger: none
+
+resources:
+  repositories:
+    - repository: ingress
+      type: git
+      name: project/ingress
+      ref: refernce-branch
+
+pool: build-scaleset
+
+stages:
+  - stage: ValidationStage
+    displayName: Build
+    jobs:
+      - job: Validation
+        displayName: Build
+        pool: build-scaleset
+        steps:
+          - checkout: ingress
+            fetchDepth: 1
+            persistCredentials: true
+          - task: NodeTool@0
+            inputs:
+              versionSpec: 23.x
+            displayName: 'Install Node.js'
+          - task: CmdLine@2
+            inputs:
+              script: |
+     
+                echo AGENT_NAME - $AGENT_NAME
+                echo "---------------------------------------------------------"
+                echo SYSTEM_DEFINITIONID - $SYSTEM_DEFINITIONID
+                echo SYSTEM_TEAMPROJECT - $SYSTEM_TEAMPROJECT
+                echo "---------------------------------------------------------"
+
+                echo "---------------------------------------------------------"
+                echo "Installing NPM Packages"
+                npm i js-yaml
+                echo "---------------------------------------------------------"
+  
+                curl --location 'git-url of your script' > script.cjs
+
+                # Run the node script and check for errors
+                node script.cjs
+                if [ $? -ne 0 ]; then
+                      echo "Error: script.cjs encountered an error"
+                      exit 1
+                fi
+            displayName: 'Ingress Validation'
+

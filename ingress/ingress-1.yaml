@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: core-architecture-uat
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/enable-prometheus-metrics: "true"
+spec:
+  tls:
+  - hosts:
+    - example-ingress-url.com
+    secretName: ssl-cert
+  rules:
+  - host: "example-ingress-url.com"
+    http:
+      paths:
+      - path: /prefix-uat-service(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service: 
+            name: prefix-service
+            port: 
+              number: 80
+      - path: /prefix-uat-service-2(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service: 
+            name: prefix-service-third
+            port: 
+              number: 80
+
